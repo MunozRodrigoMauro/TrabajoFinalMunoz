@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1_tv-_&1@tls=zemmj+h*kk8qe+2t1$w8n1(!d&1)5o12vqhu^'
+SECRET_KEY = 'django-insecure-6kgv=)c)dbz!95-)1&v$rqy@q7a&bfq4@s@2&eccjc+)w+(s@#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'SUINFI.core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,10 @@ ROOT_URLCONF = 'SUINFI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'core/templates')], # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        # Esto le dice a Django dónde buscar plantillas además de las incluidas en cada app
+        # BASE_DIR es la raíz del proyecto (TRABAJOFINALMUNOZ/)
+        # 'core/templates' es la ruta donde colocaremos nuestras plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,8 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'SUINFI/core/static')]
+# Similar a TEMPLATES, pero para archivos estáticos (CSS, JS, imágenes)
+# Django buscará archivos estáticos en esta ubicación durante el desarrollo
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'core.User'
+# Esto le dice a Django que use nuestro modelo de usuario personalizado y que lo debe respetar en toda la aplicación: AbstractUser

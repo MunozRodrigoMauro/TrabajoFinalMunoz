@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ service.name }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h2 class="card-title">{{ service.name }}</h2>
+                <h6 class="text-secondary">{{ service.get_category_display }}</h6>
+                <hr>
+                <p class="fs-5">
+                    <strong>Precio por hora:</strong> ${{ service.price_per_hour }}
+                </p>
+                <a href="{% url 'core:service_list' %}" class="btn btn-secondary mt-3">
+                    ← Volver al listado
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

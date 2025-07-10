@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-5">{{title}}</h1>
+    <p class="text-muted">{{subtitle}}</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for service in services %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ service.name }}</h5>
+                <span class="badge bg-primary mb-2">{{ service.get_category_display }}</span>
+                <p class="card-text">
+                    <strong>Precio por hora:</strong> ${{ service.price_per_hour }}
+                </p>
+                <a href="{% url 'core:service_detail' service.id %}" class="btn btn-outline-primary w-100">
+                    Ver Detalles
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning text-center">No hay servicios disponibles por el momento.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('SUINFI.core.urls')),  # Redirige las URLs principales a core
 ]
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    # Esto significa: "Todas las URLs que comienzan con / (la raíz del sitio)
+    # deben ser manejadas por el archivo urls.py de la app core"
