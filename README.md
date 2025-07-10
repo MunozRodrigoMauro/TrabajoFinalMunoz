@@ -34,35 +34,26 @@ cd TrabajoFinalMunoz
 Crear y activar un entorno virtual:
 
 bash
-Copiar
-Editar
 python -m venv .venv
 source .venv/Scripts/activate  # En Windows
 Instalar las dependencias:
 
 bash
-Copiar
-Editar
 pip install -r requirements.txt
 Aplicar migraciones:
 
 bash
-Copiar
-Editar
 python manage.py makemigrations
 python manage.py migrate
 Ejecutar el servidor de desarrollo:
 
 bash
-Copiar
-Editar
 python manage.py runserver
 Acceder desde el navegador:
 
 cpp
-Copiar
-Editar
 http://127.0.0.1:8000/
+
 ✍️ Autor
-Rodrigo Muñoz
+Muñoz Rodrigo Mauro
 Proyecto Final – Curso de Python – Coderhouse 2025
