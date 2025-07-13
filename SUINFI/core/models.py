@@ -88,7 +88,7 @@ class Service(models.Model):
 ]
 
      
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')
     price_per_hour = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -143,7 +143,7 @@ class Professional(models.Model):
         on_delete=models.CASCADE,
         related_name='professional_profile'
     )
-    profession = models.CharField(max_length=100, choices=PROFESSION_CHOICES, default='other')    
+    profession = models.CharField(max_length=100, choices=PROFESSION_CHOICES, default='other', unique=True)    
     is_verified = models.BooleanField(default=False)
     services = models.ManyToManyField(Service, related_name='professionals', blank=True)
 

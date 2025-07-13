@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SUINFI.core.apps.CoreConfig',
+    'widget_tweaks',  # Para personalizar formularios
 ]
 
 MIDDLEWARE = [

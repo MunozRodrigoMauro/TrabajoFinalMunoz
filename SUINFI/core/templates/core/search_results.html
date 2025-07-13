@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Buscar Servicios{% endblock %}
+{% block content-title %}Buscar Servicios por Categoría{% endblock %}
+
+{% block content %}
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-6">
+        {{ form.category.label_tag }} {{ form.category }}
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-outline-primary mt-4">Buscar</button>
+    </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for service in services %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ service.name }}</h5>
+                <span class="badge bg-primary mb-2">{{ service.get_category_display }}</span>
+                <p><strong>${{ service.price_per_hour }}</strong></p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning text-center">No hay servicios que coincidan.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

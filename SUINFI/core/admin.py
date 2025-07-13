@@ -5,7 +5,7 @@ from .models import User, Client, Professional, Service, Contract, PaymentMethod
 # Customización básica del User para el admin
 class UserAdmin(BaseUserAdmin):
     # Campos que aparecen en la lista de usuarios
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_active')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'birthdate', 'is_active',)
     search_fields = ('username', 'email')
     ordering = ('username',)
 

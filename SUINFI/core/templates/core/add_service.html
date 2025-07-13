@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Crear Servicio{% endblock %}
+{% block content-title %}Nuevo Servicio{% endblock %}
+
+{% block content %}
+<form method="post" novalidate>
+    {% csrf_token %}
+
+    <!-- Nombre del servicio -->
+    <div class="mb-3">
+        <label for="id_name" class="form-label">Nombre</label>
+        {{ form.name|add_class:"form-control" }}
+        {% if form.name.errors %}
+            <div class="text-danger small">
+                {{ form.name.errors.0 }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Categoría -->
+    <div class="mb-3">
+        <label for="id_category" class="form-label">Categoría</label>
+        {{ form.category|add_class:"form-select" }}
+        {% if form.category.errors %}
+            <div class="text-danger small">
+                {{ form.category.errors.0 }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Precio por hora -->
+    <div class="mb-3">
+        <label for="id_price_per_hour" class="form-label">Precio por hora</label>
+        {{ form.price_per_hour|add_class:"form-control text-danger" }}
+        {% if form.price_per_hour.errors %}
+            <div class="text-danger small">
+                {{ form.price_per_hour.errors.0 }}
+            </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+{% endblock %}

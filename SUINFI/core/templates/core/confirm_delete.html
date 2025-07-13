@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Eliminar Profesional{% endblock %}
+{% block content-title %}¿Eliminar Profesional?{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <p>¿Estás seguro de que querés eliminar a <strong>{{ professional.user.username }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'core:professional_list' %}" class="btn btn-secondary me-2">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    </form>
+</div>
+{% endblock %}
