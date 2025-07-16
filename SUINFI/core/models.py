@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 
 # -------------------- USER --------------------
@@ -23,7 +23,7 @@ class User(AbstractUser):
     def logout(self):
         # Aquí puedo registrar eventos de cierre de sesión
         pass
-
+    
 # -------------------- Payment --------------------
 class PaymentMethod(models.Model):
 
@@ -88,7 +88,7 @@ class Service(models.Model):
 ]
 
      
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='other')
     price_per_hour = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -185,3 +185,10 @@ class Contract(models.Model):
     def __str__(self):
         return f"{self.client.user.username} → {self.professional.user.username} ({self.service.name})"
     
+# -------------------- Avatar --------------------
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='avatar')
+    image = models.ImageField(upload_to='avatares', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.image}"

@@ -1,6 +1,7 @@
 from django import forms
-from .models import Service, Professional
-
+from .models import Service, Professional, Avatar
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.models import User
 
 class ServiceForm(forms.ModelForm):
     class Meta:
@@ -44,3 +45,20 @@ class ProfessionalForm(forms.ModelForm):
 class ProfessionalSearchForm(forms.Form):
     query = forms.CharField(label='Buscar profesional', max_length=100, required=False)
     
+class EditUserForm(UserChangeForm):
+    email = forms.EmailField(required=True,label='Email')
+    first_name = forms.CharField
+    
+class EditUserForm(UserChangeForm):
+    email = forms.EmailField(required=True,label='Email')
+    first_name = forms.CharField(required=True,label='Nombre')
+    last_name = forms.CharField(required=True,label='Apellido')
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name','password')
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ['image']

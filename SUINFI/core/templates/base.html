@@ -62,7 +62,19 @@
                         <li class="nav-item">
                         <a class="nav-link text-dark fw-semibold" href="{% url 'core:professional_list' %}">Profesionales</a>
                         </li>
-                        <!-- Futuro: login/logout / perfil -->
+                        <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold" href="{% url 'core:perfil' %}">Perfil</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-semibold" href="{% url 'core:editar_perfil' %}">
+                                {% if user.avatar.image %}
+                                <img src="{{ user.avatar.image.url }}" alt="Avatar" class="rounded-circle" width="30">
+                                {% endif %}
+                                {{ user.username }}
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            {{ avatar_form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form> 
+{% endblock %}
