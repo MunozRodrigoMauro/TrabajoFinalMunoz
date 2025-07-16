@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -25,3 +27,7 @@ urlpatterns = [
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^
     # Esto significa: "Todas las URLs que comienzan con / (la raíz del sitio)
     # deben ser manejadas por el archivo urls.py de la app core"
+
+#Para servir los archivos de medios durante el desarrollo.
+if settings.DEBUG: # hacemos esta validación para que servir los estaticos desde django solo en desarrollo
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

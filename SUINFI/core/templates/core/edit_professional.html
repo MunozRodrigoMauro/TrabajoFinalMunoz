@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Editar Profesional{% endblock %}
+{% block content-title %}Editar Profesional: {{ professional.user.username }}{% endblock %}
+
+{% block content %}
+<form method="post" class="col-md-6 offset-md-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="d-flex justify-content-between mt-3">
+        <a href="{% url 'core:professional_list' %}" class="btn btn-secondary">← Volver</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+</form>
+{% endblock %}

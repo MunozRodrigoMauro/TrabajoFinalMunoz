@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 
 # -------------------- USER --------------------
@@ -23,7 +23,7 @@ class User(AbstractUser):
     def logout(self):
         # Aquí puedo registrar eventos de cierre de sesión
         pass
-
+    
 # -------------------- Payment --------------------
 class PaymentMethod(models.Model):
 
@@ -143,7 +143,7 @@ class Professional(models.Model):
         on_delete=models.CASCADE,
         related_name='professional_profile'
     )
-    profession = models.CharField(max_length=100, choices=PROFESSION_CHOICES, default='other')    
+    profession = models.CharField(max_length=100, choices=PROFESSION_CHOICES, default='other', unique=True)    
     is_verified = models.BooleanField(default=False)
     services = models.ManyToManyField(Service, related_name='professionals', blank=True)
 
@@ -185,3 +185,10 @@ class Contract(models.Model):
     def __str__(self):
         return f"{self.client.user.username} → {self.professional.user.username} ({self.service.name})"
     
+# -------------------- Avatar --------------------
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='avatar')
+    image = models.ImageField(upload_to='avatares', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.image}"

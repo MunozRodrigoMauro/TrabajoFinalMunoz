@@ -1,12 +1,32 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}SUINFI{% endblock %}
+{% block title %}Inicio | SUINFI{% endblock %}
 
 {% block content %}
-  <h1>{{ titulo }}</h1>
-  <h2>{{ mensaje }}</h2>
-  <ul>
-    <li><a href="{% url 'core:service_list' %}">Ver servicios disponibles</a></li>
-    <li><a href="{% url 'core:user_list' %}">Ver usuarios registrados</a></li>
-  </ul>
+<div class="container text-center mt-5">
+    <h1 class="display-4">Bienvenido a SUINFI</h1>
+    <p class="lead">Conectamos personas con profesionales confiables de todo el país</p>
+
+    <div class="mt-4">
+        <a href="{% url 'core:add_service' %}" class="btn btn-success btn-lg m-2">Publicar un Servicio</a>
+        <a href="{% url 'core:search_services' %}" class="btn btn-primary btn-lg m-2">Buscar Profesionales</a>
+    </div>
+
+    <hr class="my-5">
+
+    <h3>Categorías Populares</h3>
+    <div class="row justify-content-center mt-3">
+        {% for key, label in service_form.category.field.choices %}
+            {% if key %}
+            <div class="col-md-3 mb-3">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ label }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
